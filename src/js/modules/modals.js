@@ -1,9 +1,12 @@
+import calcScroll from "./calcScroll";
+
 const modals = () => {
   function bindModal(triggerSelector, modalSelector, closeSelector, closeClickOverlay = true) {
     const trigger = document.querySelectorAll(triggerSelector);
     const modal = document.querySelector(modalSelector);
     const close = document.querySelector(closeSelector);
     const windows = document.querySelectorAll('[data-modal]');
+	 const scroll = calcScroll()
 	
     trigger.forEach((item) => {
       item.addEventListener("click", (e) => {
@@ -17,6 +20,7 @@ const modals = () => {
 
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
+		  document.body.style.marginRight = `${scroll}px`
         // document.body.classList.add('modal-open')
       });
     });
@@ -27,6 +31,8 @@ const modals = () => {
       });
       modal.style.display = "none";
       document.body.style.overflow = "";
+		  document.body.style.marginRight = `0px`;
+
       // document.body.classList.add('modal-close')
     });
 
@@ -37,6 +43,8 @@ const modals = () => {
         });
         modal.style.display = "none";
         document.body.style.overflow = "";
+		  document.body.style.marginRight = `0px`;
+
         // document.body.classList.add('modal-close')
       }
     });
@@ -48,6 +56,8 @@ const modals = () => {
       document.body.style.overflow = "hidden";
     }, time);
   }
+
+  
 
   bindModal(
     ".popup_engineer_btn",
